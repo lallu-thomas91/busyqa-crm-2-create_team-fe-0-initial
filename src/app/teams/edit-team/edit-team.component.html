@@ -1,0 +1,91 @@
+
+<div class="jumbotron border border-warning mt-3 py-4" style="background-color: #def0a6;">
+   <!-- Error Alert-->
+   <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="error!=''">
+    <span>{{error}} Please try again...!</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="error=''">
+      <span aria-hidden="true">&times;</span>   
+    </button>
+  </div>
+  <h1 *ngIf="mode==='create'" class="display-5 mb-3">Create new Team</h1> 
+  <h1 *ngIf="mode==='update'" class="display-5 mb-3">Update Team</h1>
+  <form #teamForm="ngForm" >
+    <div class="col-12 form-group row" *ngIf="mode==='update'">
+      <label class="col-2 col-form-label ">Id:</label>
+      <input type="text" class="col-3 form-control" name="idTeam" [ngModel]="team.idTeam" readonly>
+    </div>
+    <!--Team name & description-->
+    <div class="col-12 form-group row ">
+      <label class="col-2 col-form-label">Team Name:</label>
+      <input type="text" class="col-10 form-control" placeholder="Type in Team Name" name="teamname" [ngModel]="team.teamname" required>
+    </div>
+    <div class="col-12 form-group row">
+      <label class="col-2 col-form-label">Team Description: </label>
+      <input type="text" class="col-10 form-control" placeholder="Description of team (max 100 characters)" name="teamdescr" [ngModel]="team.teamdescr" required>
+    </div>
+    <!--creator on & by-->
+    <div class="form-group row ml-1" *ngIf="mode==='update'">
+      <div class="col-6 form-group row" >
+        <label class="col-4 col-form-label">Created by: </label>
+        <input type="text" class="col-8 form-control" name="createdby" [ngModel]="team.createdby" readonly>
+      </div>   
+      <div class="col-6 form-group row ml-1">
+        <label class="col-4 col-form-label">Date created on: </label>
+        <input type="date" class="col-8 form-control" name="createdon" [ngModel]="team.createdOn" readonly>
+      </div>
+    </div>
+  </form>
+      <!--Members-->
+      <div *ngIf="mode==='update'">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Team Members</th>
+              <th scope="col">Add New Members</th>
+              <th scope="col">Remove Members</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td *ngIf="teamsize === 0" >*No members in the team</td>
+              <td>
+                <table class="table">
+                  <tbody>
+                    <tr *ngFor="let member of team.memberUsernames; let i = index">  
+                      <a>{{i+1}}. {{member}}</a>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td>
+                <form #addMemberForm="ngForm" >
+                  <select class="custom-select" multiple name="addMembers" [(ngModel)]="addUsernames">
+                    <option value="null" selected disabled>Choose members to add...</option>
+                    <option value="null" selected disabled>(use Ctrl+ click for multiple)</option>
+                    <option *ngFor="let user of validUsernames; let i = index" value="{{user}}">{{i+1}}. {{user}}</option>
+                  </select>
+                  <button type="button" class="btn btn-primary mt-2" style="min-width: 50px;" 
+                    (click)="onAddMembers()">Save</button>
+                </form>
+              </td>
+              <td>
+                <form #removeMemberForm="ngForm" >
+                  <select class="custom-select" multiple data-filter="true" name="removeMembers" [(ngModel)]="removeUsernames">
+                    <option value="null" selected disabled>Choose members to remove...</option>
+                    <option value="null" selected disabled>(use Ctrl+ click for multiple)</option>
+                    <option *ngFor="let member of team.memberUsernames; let i = index" value="{{member}}">{{i+1}}. {{member}}</option>
+                  </select>
+                  <button type="button" class="btn btn-primary mt-2" style="min-width: 50px;" 
+                      (click)="onRemoveMembers()">Save</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <button type="button" (click)="onSubmit(teamForm.value)" class="btn btn-primary mt-2" style="min-width: 100px;" [disabled]="!teamForm.valid">Submit</button>
+    <button type="reset" class="btn btn-outline-primary mt-2 ml-3" style="min-width: 100px;"
+        [routerLink]="['/teams','']">Cancel</button>
+  
+</div>
+
