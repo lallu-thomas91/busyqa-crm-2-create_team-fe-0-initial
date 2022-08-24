@@ -2,7 +2,7 @@
   <div class="jumbotron border border-primary mt-3 pt-5 pb-4" style="background-color: #d4e2ef;" >
     <div class="form-group row">
       <label class="col-2 col-form-label text-right"> </label>
-      <div class="col-6">
+      <div class="col-6 ml-3">
         <h1 class="text-justify">Login</h1>
       </div>
     </div>
@@ -13,43 +13,42 @@
         <span aria-hidden="true">&times;</span>   
       </button>
     </div>
-    <small class="text-danger" *ngIf="mode=='error'">Whoops..!!! Something went wrong! Please try again.</small>
-    <small class="text-success" *ngIf="mode=='signup_success'">User registered successfully...</small>
-    <small class="text-primary" *ngIf="mode=='logout_success'">You have been logged out successfully...</small>
+    <div class="mb-2">
+      <small class="text-danger" *ngIf="mode=='error'">Oops..!!! Something went wrong! Please try again.</small>
+      <small class="text-success" *ngIf="mode=='signup_success'">User registered successfully...</small>
+      <small class="text-primary" *ngIf="mode=='logout_success'">You have been logged out successfully...</small>
+    </div>
     <!-- Login Form -->
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value); loginForm.resetForm()">
       <div class="form-group row">
-        <label class="col-2 col-form-label text-right">Username</label>
-        <div class="col-6">
+        <label class="col-2 col-form-label text-right">Username:</label>
+        <div class="col-8 ml-3">
           <input type="text" class="form-control" placeholder="Enter username" name="username" ngModel required>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-2 col-form-label text-right">Password</label>
-        <div class="col-6">
+        <label class="col-2 col-form-label text-right">Password:</label>
+        <div class="col-8 ml-3">
           <input type="password" class="form-control" placeholder="Enter Password" name="password" ngModel required>
         </div>
       </div>
-      <div class="form-group row">
+      <div class="form-group row ml-2">
           <label class="col-2 col-form-label text-right"> </label>
-          <button type="submit" class="btn btn-primary mt-2 ml-3" style="min-width: 100px;"
+          <button type="submit" class="btn btn-primary mt-2 ml-3" style="min-width: 120px;"
               [disabled]="!loginForm.valid">Login
           </button>
-          <button type="reset" class="btn btn-outline-primary mt-2 ml-3" style="min-width: 100px;"
+          <button type="reset" class="btn btn-outline-primary mt-2 ml-3" style="min-width: 120px;"
             routerLink="/login">Cancel
           </button>
       </div>
-      <div class="form-group row mt-4">
+      <div class="form-group row ml-2 mt-4">
         <label class="col-2 col-form-label text-right"> </label>
         <button type="button" class="btn btn-primary mt-2 ml-3" routerLink="/signup" 
-          style="min-width: 220px;">New User? Sign up</button>
+          style="min-width: 250px;">New User? Sign up</button>
       </div>
     </form>
   </div>
 </div>
-<br/>
-<br/>
-<br/>
 <br/>
 <br/>
 <br/>
