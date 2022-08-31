@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
 
   authenticated = false;
 
-  constructor(private userService: UserService,
+  constructor(public userService: UserService,
               private teamService: TeamService){    
   }
 
@@ -26,5 +26,6 @@ export class AppComponent implements OnInit{
   
   onlogout(){
     this.userService.logout();
+    this.authenticated = false;
   }
 }

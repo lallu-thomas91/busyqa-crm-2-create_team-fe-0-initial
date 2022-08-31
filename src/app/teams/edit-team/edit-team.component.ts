@@ -12,7 +12,6 @@ import { UserService } from 'src/app/user.service';
   styleUrls: ['./edit-team.component.css']
 })
 export class EditTeamComponent implements OnInit {
-
   team : Team = <Team>{};
   idTeam : number = 0;
   username: String = '';
@@ -40,7 +39,6 @@ export class EditTeamComponent implements OnInit {
       this.idTeam = this.route.snapshot.params['idTeam'];
       this.fetchTeam(this.idTeam);
       this.fetchValidUsers(this.idTeam);
-      
     }
   }
 

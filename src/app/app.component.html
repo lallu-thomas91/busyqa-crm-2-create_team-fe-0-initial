@@ -20,8 +20,10 @@
         </li>
       </ul>
     </div>
-    <button type="button" class="rounded mr-2" routerLink="/login">Login</button>
-    <a href="javascript:void(0);" (click)="onlogout()">Logout {{username}}</a>   
+    <button *ngIf="!this.userService.authenticated" type="button" class="rounded mr-2" 
+      routerLink="/login" style="background-color: #a8dce5;">Login</button>
+    <button *ngIf="this.userService.authenticated" type="button" class="rounded mr-2" href="javascript:void(0);" 
+      (click)="onlogout()" style="background-color: #f1a14b;">Logout [{{this.userService.username}}]</button>   
   </nav>
   <router-outlet></router-outlet>
 </div>
